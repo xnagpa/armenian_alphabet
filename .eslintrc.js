@@ -20,8 +20,10 @@ module.exports = {
         "react",
         "@typescript-eslint"
     ],
+    "ignorePatterns": ["_app.js", "/pages/index.tsx"],
     "rules": {
         "semi": ["error", "never"],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "react/function-component-definition": [
             2,
             {

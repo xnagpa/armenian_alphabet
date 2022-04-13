@@ -1,12 +1,20 @@
 import React, { useState } from 'react'
-import styles from './style.module.css'
+import getConfig from 'next/config'
 
+interface Props {
+  capital: string;
+  small: string;
+  url: string;
+  likeEng: string;
+  tabIndex: number;
+}
+const { publicRuntimeConfig } = getConfig()
 
-const Letter = (props) => {
+const Letter = (props: Props) => {
   const [state, setState] = useState({ showTranslation: false })
-  const { capital, small, url } = props
+  const { capital, small, url, likeEng, tabIndex } = props
 
-  const toggleTranslation = (e: MouseEventHandler<HTMLDivElement>) => {
+  const toggleTranslation = (e: any) => {
     if(e.target.className !== 'letter__audio') {
       setState({ showTranslation: !state.showTranslation })
       setTimeout(() => setState({ showTranslation: false }), 3000)
@@ -14,18 +22,18 @@ const Letter = (props) => {
   }
 
   const playAudio = () => {
-    new Audio(url).play();
+    new Audio(`${publicRuntimeConfig.assetPrefix}${url}`).play()
   }
 
   return (
-    <div className="letter" onClick={toggleTranslation}>
+    <div className="letter" onClick={toggleTranslation} onKeyDown={toggleTranslation} role="button" tabIndex={tabIndex}>
       <div className={`letter__sign ${state.showTranslation ? 'hidden' : ''}`}>
-        <h2>{props.capital}, {props.small}</h2>
+        <h2>{capital}, {small}</h2>
       </div>
       <div className={`letter__translation ${state.showTranslation ? '' : 'hidden'}`}>
-        <h2>{props.likeEng}</h2>
+        <h2>{likeEng}</h2>
       </div>
-      <button className="letter__audio" onClick={playAudio}>Audio</button>
+      <button type="button" className="letter__audio" onClick={playAudio}>Audio</button>
     </div>
   )
 }

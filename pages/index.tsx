@@ -1,12 +1,14 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import React from 'react'
+import { div, h1, main, meta, title, link } from 'react-dom'
 
 import styles from '../styles/Home.module.css'
 import Letter from '../components/letter'
 
 
 import lettersArray from '../models/letters'
+
 
 export default function Home() {
   return (
@@ -23,9 +25,9 @@ export default function Home() {
         </h1>
         <div className={styles.grid}>
           { 
-            lettersArray.map((letter) => (
+            lettersArray.map((letter, index) => (
               <div key={`letter${letter.likeEng}`} className={styles.card}>
-                <Letter {...letter} />
+                <Letter {...{...letter, tabIndex: index}} />
               </div>
             ))
           }

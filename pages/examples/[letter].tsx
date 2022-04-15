@@ -1,12 +1,12 @@
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import React from 'react'
+import styles from '../../styles/Home.module.css'
+import words from '../../models/words'
 
-import styles from '../styles/Home.module.css'
-import Letter from '../components/letter'
-
-import lettersArray from '../models/letters'
-
-export default function Home() {
+export default () => {
+  const router = useRouter()
+  const goBack = () => router.back()
   return (
     <div className={styles.container}>
       <Head>
@@ -17,15 +17,12 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Let's speak Armenian!
+          {router.query.letter}
         </h1>
-        <div className={styles.grid}>
-          {
-            lettersArray.map((letter, index) => (
-              <Letter key={`letter${letter.likeEng}`} klass={styles.card} {...{...letter, tabIndex: index}} />
-            ))
-          }
-        </div>
+        <ul>
+          {words[router.query.letter as string]?.map((couple) => <li key={couple.word}>{couple.word}: {couple.translation}</li>)}
+        </ul>
+        <span onClick={goBack}>Back</span>
       </main>
 
       <footer className={styles.footer}>

@@ -1,3 +1,14 @@
 .letter {
-  background-color: red;
+  border: 1px solid black;
+  border-radius: 20px;
 }
+
+.letter:hover {
+  color: skyblue;
+  border: 1px solid skyblue;
+}
+
+.letter.long--pressed {
+  border: 5px solid red;
+}
+

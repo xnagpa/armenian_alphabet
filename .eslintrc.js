@@ -23,13 +23,18 @@ module.exports = {
     "ignorePatterns": ["_app.js", "/pages/index.tsx"],
     "rules": {
         "semi": ["error", "never"],
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/jsx-props-no-spreading": ["off"],
+        "jsx-a11y/click-events-have-key-events": ["off"],
+        "jsx-a11y/no-static-element-interactions": ["off"],
+        "import/no-unresolved": "off",
+        "import/extensions": "off",
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
         "react/function-component-definition": [
             2,
             {
-              namedComponents: "arrow-function",
-              unnamedComponents: "arrow-function",
+                namedComponents: "arrow-function",
+                unnamedComponents: "arrow-function",
             },
-          ],
+        ],
     }
 }
